@@ -67,16 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ballId   = $ballTypeId   > 0 && $numBalls   > 0 ? $ballTypeId   : null;
                 $racketId = $racketTypeId > 0 && $numRackets > 0 ? $racketTypeId : null;
 
-                $stmt = $db->prepare('
-                    INSERT INTO reservations
-                    (user_id, pitch_type_id, ball_type_id, racket_type_id, number_of_balls, number_of_rackets, start_time, end_time, total_price, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, "pending")
-                ');
-                $stmt->bind_param('iiiiiisd', $userId, $pitchTypeId, $ballId, $racketId, $numBalls, $numRackets, $startStr, $endStr, $total);
-                // Note: mysqli doesn't directly support null via bind_param easily; using alternative
-                $stmt->close();
-
-                // Use query with proper null handling
+                // Use a raw query to handle nullable ball/racket IDs cleanly
                 $ballIdSql   = $ballId   !== null ? $ballId   : 'NULL';
                 $racketIdSql = $racketId !== null ? $racketId : 'NULL';
                 $safeStart   = $db->real_escape_string($startStr);
@@ -106,6 +97,7 @@ require_once __DIR__ . '/../layouts/navbar.php';
     <aside class="sidebar">
         <div class="sidebar-section">Menu</div>
         <a href="/pages/dashboard.php">&#128203; My Reservations</a>
+        <a href="/pages/catalog.php">&#127907; Options &amp; Pricing</a>
         <a href="/pages/reservation.php" class="active">&#10133; New Booking</a>
         <div class="sidebar-section">Account</div>
         <a href="/pages/logout.php">&#128682; Sign Out</a>
