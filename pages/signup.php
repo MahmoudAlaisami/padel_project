@@ -41,10 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $db->prepare('INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, "user")');
                 $stmt->bind_param('sss', $fullName, $email, $hashed);
                 if ($stmt->execute()) {
-                    $success = 'Account created! You can now sign in.';
-                } else {
-                    $error = 'Registration failed. Please try again.';
-                }
+
+    // get inserted user id
+    $userId = $stmt->insert_id;
+
+    // auto login after signup
+    $_SESSION['user_id'] = $userId;
+    $_SESSION['user_name'] = $fullName;
+    $_SESSION['user_email'] = $email;
+    $_SESSION['role'] = 'user';
+
+    // redirect مباشرة عالحجز او الداشبورد
+    header('Location: /pages/reservation.php');
+    exit;
+
+} else {
+    $error = 'Registration failed. Please try again.';
+}
             }
             $stmt->close();
         }
