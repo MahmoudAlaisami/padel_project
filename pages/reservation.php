@@ -204,7 +204,7 @@ require_once __DIR__ . '/../layouts/navbar.php';
                         <div class="price-row"><span>Pitch cost</span><span id="pricePitch">—</span></div>
                         <div class="price-row"><span>Balls cost</span><span id="priceBalls">—</span></div>
                         <div class="price-row"><span>Rackets cost</span><span id="priceRackets">—</span></div>
-                        <div class="price-row total"><span>Grand Total</span><span id="priceTotal">—</span></div>
+                        <div class="price-row total"><span>Grand Totalkkkkkk</span><span id="priceTotal">—</span></div>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 mt-3 btn-lg">Confirm Reservation</button>
