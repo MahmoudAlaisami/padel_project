@@ -1,113 +1,66 @@
-# PadelPro — Padel Pitch Reservation System
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-A full-featured PHP + MySQL web application for managing padel court reservations.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Tech Stack
+## About Laravel
 
-- **Backend:** PHP (vanilla, no framework)
-- **Frontend:** HTML5, CSS3, JavaScript (vanilla)
-- **Database:** MySQL
-- **Auth:** PHP sessions with password hashing
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## Features
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- Public landing page with hero, features, and CTA sections
-- User registration & login (with role-based redirect)
-- User dashboard: view, create, and cancel reservations
-- Real-time price calculator on the booking page
-- Overlap detection to prevent double bookings
-- Admin dashboard with stats (users, reservations, revenue)
-- Admin: manage reservations (approve / cancel / delete / filter)
-- Admin: manage item categories and pricing types
-- Admin: manage users (promote, demote, delete)
-- CSRF protection on all forms
-- Prepared SQL statements throughout
-- Responsive dark-theme sports UI
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Setup
+## Learning Laravel
 
-### 1. Requirements
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-- PHP 8.0+
-- MySQL 5.7+ / MariaDB
-- A web server (Apache / Nginx) **with document root pointing to the project folder**
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-### 2. Database
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-```bash
-mysql -u root -p < database/schema.sql
-```
+## Laravel Sponsors
 
-This creates the `padel_reservation` database, all tables, seed data, and a default admin account.
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-**Default admin credentials:**
-- Email: `admin@padel.com`
-- Password: `password`
+### Premium Partners
 
-### 3. Configure database connection
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-Edit `config/db.php` and update the credentials:
+## Contributing
 
-```php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', 'your_password');
-define('DB_NAME', 'padel_reservation');
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 4. Run with PHP built-in server (development)
+## Code of Conduct
 
-```bash
-cd /path/to/padel_anas
-php -S localhost:8000
-```
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Then open [http://localhost:8000](http://localhost:8000).
+## Security Vulnerabilities
 
-> **Note:** PHP's built-in server serves from the project root, so all absolute paths (`/assets/css/style.css`, `/pages/signin.php`, etc.) resolve correctly.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-### 5. Apache (production)
+## License
 
-Point your `DocumentRoot` to the project folder. Enable `mod_rewrite` if needed. No `.htaccess` rewrites are required; all routing is done via direct file paths.
-
-## Folder Structure
-
-```
-padel_anas/
-├── config/
-│   └── db.php                 # Database connection singleton
-├── database/
-│   └── schema.sql             # Full DB schema + seed data
-├── includes/
-│   └── functions.php          # Auth helpers, sanitization, price calc
-├── layouts/
-│   ├── header.php             # HTML <head> + <body> open
-│   ├── navbar.php             # Responsive navigation bar
-│   └── footer.php             # Footer + JS include
-├── pages/
-│   ├── signin.php
-│   ├── signup.php
-│   ├── logout.php
-│   ├── dashboard.php          # User dashboard
-│   └── reservation.php        # Booking form
-├── admin/
-│   ├── index.php              # Admin dashboard
-│   ├── reservations.php       # Manage all reservations
-│   ├── items.php              # Manage categories & item types
-│   └── users.php              # Manage users
-├── assets/
-│   ├── css/style.css
-│   ├── js/main.js
-│   └── images/
-├── uploads/
-├── index.php                  # Public landing page
-└── README.md
-```
-
-## Price Formula
-
-```
-Total = (Pitch price/hr × hours) + (Ball unit price × qty) + (Racket unit price × qty)
-```
-
-The price updates live in the browser as users fill out the booking form.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
